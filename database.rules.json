@@ -6,7 +6,7 @@
       "command": {
         ".read": true,
         ".write": true,
-        ".validate": "newData.hasChildren(['type', 'pool', 'id', 'sentAt']) && newData.child('type').val() === 'champion-carousel:spin' && newData.child('pool').numChildren() > 0 && newData.child('pool').numChildren() <= 173"
+        ".validate": "newData.hasChildren(['type', 'pool', 'id', 'sentAt']) && newData.child('type').val() === 'champion-carousel:spin' && newData.child('pool').exists()"
       }
     }
   }
