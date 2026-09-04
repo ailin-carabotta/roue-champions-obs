@@ -1,0 +1,762 @@
+<!doctype html>
+<html lang="fr"><head><script>window["__codeletBootstrap__"]=JSON.parse('{"A":"A","B":"20260828-05-5fe3063","C":{"Abril Fatface":"YACgEZbkUVE,0","Alfa Slab One":"YACgEYS9sJU,0","Anton":"YACgEcYqQ-A,0","Archivo":"YAHO2-t-jNE,0","Arial":"YAGyDvJ_4Ts,0","Bebas Neue":"YACgESME5ew,0","Bricolage Grotesque":"YAFyMcdwzpc,0","Canva Sans":"YAFLd8sKbwc,2","Caveat":"YALBs2ploWQ,0","Comic Sans MS":"YAHO2VMiyZo,0","Cormorant Garamond":"YAFdJhX-538,0","Courier New":"YAGzXiGs0_8,0","DM Sans":"YAD1aU3sLnI,0","DM Serif Display":"YAD1aYG82rc,0","Forum":"YACgEcnnqB4,0","Fraunces":"YAEul-FRQw4,0","Georgia":"YAGzXkO0pEM,0","Helvetica Neue":"YAFcf6CtJfI,0","Impact":"YAFcfnjI7Vk,0","Inter":"YAFdJvSyp_k,3","Iowan Old Style":"YAGNIFa8j9o,0","Jacques Francois":"YAHO2a5g66Q,0","JetBrains Mono":"YAFdJksXcAk,0","Libre Baskerville":"YACgEUFdPdA,0","Manrope":"YAHO2b2feC4,0","Merriweather":"YACgEXvHxxs,0","Montserrat":"YADLjI9qxTA,0","Nunito":"YACgEX8C5Gg,0","Oleo Script":"YACgEQQ14jI,0","Phantom Sans":"YAHO2E8Pb88,0","Playfair Display":"YACgEYmuCJE,0","Poppins":"YAFdJjbTu24,1","Press Start 2P":"YAFyGr-8pmQ,0","Quicksand":"YADWjpfPmdk,0","Raleway":"YACgEVg3xZg,0","Segoe UI":"YAHNdRD1Klw,0","Source Sans 3":"YAG4lO1Mj10,0","Spectral":"YAHO2rVUHIM,0","Times New Roman":"YAGzXW3gftg,0","Times":"YAGzXW3gftg,0","Ubuntu":"YACgERDU--Q,0","Work Sans":"YAGXhLOKv44,0","Yellowtail":"YACgEYG4kG4,0","ui-monospace":"YADlN8CFZ8Q,0","ui-sans-serif":"YACkoN-xg4g,0"}}');</script><script src="/_sdk/50d846425a1e5082.telemetry_sdk.js" integrity="sha512-Otbex+ztlVbcEGql0rXGd/3E3ee/hqAntg6DeuUEMG6pIPbXGOSvZbFZVzknAXi1tH/itQ+ijEhOTr2aWj6CXg=="></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Roue des Champions</title>
+  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lucide@0.263.0/dist/umd/lucide.min.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Eczar:wght@600;700;800&amp;family=Fira+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --gold: #f7c95c;
+      --gold-light: #ffe7a7;
+      --cream: #fff8e7;
+      --ink: #080b16;
+      --steel: #99b6e2;
+      --card-width: clamp(145px, 17vw, 218px);
+      --card-height: clamp(205px, 24vw, 310px);
+    }
+
+    * { box-sizing: border-box; }
+
+    html, body {
+      margin: 0;
+      min-height: 100%;
+      width: 100%;
+      background: transparent !important;
+    }
+
+    body {
+      color: var(--cream);
+      font-family: "Fira Sans", sans-serif;
+      overflow-x: hidden;
+    }
+
+    .app-shell {
+      width: 100%;
+      min-height: calc(100 * min(var(--vh, 1vh), 1vh));
+      position: relative;
+      overflow: hidden;
+      isolation: isolate;
+    }
+
+    .heading-font { font-family: "Eczar", serif; }
+
+    .eyebrow {
+      color: var(--gold-light);
+      font-size: .72rem;
+      font-weight: 700;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      text-shadow: 0 1px 12px rgba(247, 201, 92, .34);
+    }
+
+    .page-title {
+      text-shadow: 0 2px 18px rgba(8, 11, 22, .92), 0 0 28px rgba(247, 201, 92, .18);
+    }
+
+    .carousel-section {
+      width: 100%;
+      max-width: 1320px;
+      position: relative;
+      margin: 0 auto;
+      padding: 1.25rem 0 1.4rem;
+    }
+
+    .carousel-glow {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      width: min(44vw, 440px);
+      height: 74%;
+      transform: translate(-50%, -50%);
+      border-radius: 50%;
+      background: radial-gradient(ellipse, rgba(247,201,92,.16), rgba(88,130,194,.07) 45%, transparent 72%);
+      filter: blur(12px);
+      pointer-events: none;
+    }
+
+    .carousel-viewport {
+      width: min(100%, calc(var(--card-width) * 2.0));
+      margin: 0 auto;
+      position: relative;
+      overflow: hidden;
+      padding: 1rem 0 1.1rem;
+      mask-image: linear-gradient(to right, transparent, black 9%, black 91%, transparent);
+      -webkit-mask-image: linear-gradient(to right, transparent, black 9%, black 91%, transparent);
+    }
+
+    .carousel-track {
+      display: flex;
+      align-items: center;
+      gap: clamp(.65rem, 1.4vw, 1.15rem);
+      width: max-content;
+      padding: .65rem calc(50% - var(--card-width) / 2);
+      transform: translate3d(0, 0, 0);
+      will-change: transform;
+    }
+
+    .champion-card {
+      width: var(--card-width);
+      height: var(--card-height);
+      flex: 0 0 var(--card-width);
+      position: relative;
+      overflow: hidden;
+      border: 1px solid rgba(164, 194, 239, .72);
+      border-radius: 12px;
+      background: linear-gradient(145deg, #16213c, #090e1c);
+      box-shadow: 0 12px 24px rgba(0, 0, 0, .55), inset 0 0 0 1px rgba(255,255,255,.06);
+      transform: scale(.92);
+      opacity: .68;
+      transition: transform .28s ease, opacity .28s ease, border-color .28s ease, box-shadow .28s ease;
+    }
+
+    .champion-card::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background: linear-gradient(to bottom, transparent 44%, rgba(4, 7, 15, .24) 61%, rgba(4, 7, 15, .96) 100%);
+    }
+
+    .champion-card.is-near {
+      opacity: .92;
+      transform: scale(.965);
+    }
+
+    .champion-card.is-winner {
+      z-index: 2;
+      opacity: 1;
+      border-color: var(--gold-light);
+      transform: scale(1.06);
+      box-shadow: 0 0 0 2px rgba(247, 201, 92, .45), 0 0 26px rgba(247, 201, 92, .72), 0 22px 34px rgba(0,0,0,.72);
+    }
+
+    .champion-card.is-winner .card-name {
+      color: var(--gold-light);
+    }
+
+    .champion-splash {
+      width: 100%;
+      height: 100%;
+      display: block;
+      object-fit: cover;
+      object-position: center center;
+      position: absolute;
+      inset: 0;
+    }
+
+    .champion-card.has-fallback .champion-splash { display: none; }
+
+    .fallback-art {
+      position: absolute;
+      inset: 0;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem;
+      color: #dceaff;
+      text-align: center;
+      font-family: "Eczar", serif;
+      font-size: 1.35rem;
+      line-height: 1.05;
+      background:
+        radial-gradient(circle at 30% 23%, rgba(247,201,92,.48), transparent 19%),
+        linear-gradient(135deg, #263d6d 0%, #111b35 44%, #080b16 100%);
+    }
+
+    .champion-card.has-fallback .fallback-art { display: flex; }
+
+    .card-name {
+      position: absolute;
+      z-index: 1;
+      inset: auto .75rem .72rem;
+      margin: 0;
+      color: var(--cream);
+      font-family: "Eczar", serif;
+      font-size: clamp(.95rem, 1.55vw, 1.18rem);
+      font-weight: 700;
+      line-height: 1.05;
+      text-align: center;
+      text-shadow: 0 2px 4px #000, 0 0 12px rgba(0,0,0,.8);
+    }
+
+    .selection-marker {
+      position: absolute;
+      z-index: 5;
+      top: .3rem;
+      bottom: .3rem;
+      left: 50%;
+      width: calc(var(--card-width) + 14px);
+      transform: translateX(-50%);
+      border: 2px solid rgba(255, 231, 167, .88);
+      border-radius: 15px;
+      box-shadow: 0 0 0 1px rgba(8,11,22,.92), 0 0 22px rgba(247,201,92,.56), inset 0 0 22px rgba(247,201,92,.12);
+      pointer-events: none;
+    }
+
+    .selection-marker::before,
+    .selection-marker::after {
+      content: "";
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 0;
+      height: 0;
+      border-left: 12px solid transparent;
+      border-right: 12px solid transparent;
+      filter: drop-shadow(0 2px 2px rgba(0,0,0,.8));
+    }
+
+    .selection-marker::before {
+      top: -11px;
+      border-top: 15px solid var(--gold-light);
+    }
+
+    .selection-marker::after {
+      bottom: -11px;
+      border-bottom: 15px solid var(--gold-light);
+    }
+
+    .status-area {
+      min-height: 98px;
+      display: grid;
+      place-items: center;
+      padding: .75rem 1rem;
+      text-align: center;
+    }
+
+    .status-panel { display: none; }
+    .status-panel.is-active { display: block; animation: rise .28s ease both; }
+
+    .loading-line {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: .6rem;
+    }
+
+    .spinner {
+      width: 18px;
+      height: 18px;
+      border: 3px solid rgba(255,255,255,.24);
+      border-top-color: var(--gold-light);
+      border-radius: 999px;
+      animation: spin .72s linear infinite;
+    }
+
+    .result-name {
+      margin: .15rem 0 0;
+      color: var(--gold-light);
+      font-family: "Eczar", serif;
+      font-size: clamp(1.65rem, 4vw, 2.65rem);
+      font-weight: 800;
+      line-height: 1.1;
+      text-shadow: 0 0 20px rgba(247,201,92,.55);
+    }
+
+    @keyframes spin { to { transform: rotate(360deg); } }
+    @keyframes rise { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
+
+    @media (max-width: 640px) {
+      :root {
+        --card-width: clamp(132px, 45vw, 175px);
+        --card-height: clamp(188px, 64vw, 250px);
+      }
+
+      .carousel-section { padding-top: .45rem; }
+      .selection-marker { width: calc(var(--card-width) + 10px); }
+      .carousel-viewport {
+        mask-image: linear-gradient(to right, transparent, black 4%, black 96%, transparent);
+        -webkit-mask-image: linear-gradient(to right, transparent, black 4%, black 96%, transparent);
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: .01ms !important;
+        animation-iteration-count: 1 !important;
+        scroll-behavior: auto !important;
+      }
+      .champion-card { transition-duration: .01ms; }
+    }
+  </style>
+  <script src="/_sdk/b3bf9e8ac58e6ad6.data_sdk.js" type="text/javascript" integrity="sha512-otc1u9NYq9Ms5Jt//7vmhrrqR5CLPr8Jdgs6741gqniClfLMcfmC+jK/cKuQdhLv6G0esJ/FzaMS9tv0T/vj/Q=="></script>
+  <script src="/_sdk/a6de989e8af05ea5.resizing_sdk.js" type="text/javascript" integrity="sha512-cceAQMIleYr/3eg7o5WzN46w0HpgI1sxi+5kDUb7CmTjHEpgBtINDxtOpnNeUtujjui8NG0OSDgUMl0/E2lT2A=="></script>
+ </head>
+ <body data-template-id="__page-root" style="background: transparent;">
+  <div class="app-shell">
+   <header class="w-full px-5 pt-9 text-center">
+    <p data-template-id="eyebrow-text" class="canva-text eyebrow hidden" style="color: rgb(255, 227, 154); font-weight: 700; font-style: normal; font-size: 12px; letter-spacing: 0.12rem;">Invocation aléatoire</p>
+    <h1 data-template-id="page-title" class="canva-text heading-font page-title mt-2 leading-tight hidden" style="color: rgb(255, 248, 231); font-weight: 800; font-style: normal; font-size: 32px;">Roue aléatoire des champions</h1>
+   </header>
+   <main class="w-full px-3 pb-8 pt-3">
+    <section class="carousel-section" aria-labelledby="page-title">
+     <div class="carousel-glow" aria-hidden="true"></div>
+     <div id="carousel-viewport" class="carousel-viewport" aria-label="Carrousel de champions">
+      <div id="carousel-track" class="carousel-track"></div>
+      <div class="selection-marker" aria-hidden="true"></div>
+     </div>
+     <section class="status-area" aria-label="Résultat du tirage">
+      <div id="result-panel" class="status-panel" aria-live="polite" aria-atomic="true">
+       <p id="result-name" class="result-name hidden"></p>
+      </div>
+     </section>
+     <p id="accessible-announcement" class="sr-only" aria-live="assertive" aria-atomic="true"></p>
+    </section>
+   </main>
+  </div>
+  <script src="/_sdk/c6bcadf20ce5820f.editing_sdk.js" integrity="sha512-LVukVCTKnKSxy98w+wCVzDAxVXBG2vy32XblXlmJD9CPFnF2/FVc75CFngl41IdXcX3sVHJc9olw64zrPM/FIA=="></script>
+  <script>
+    const champions = [
+      "Aatrox", "Ahri", "Akali", "Akshan", "Alistar", "Ambessa", "Amumu", "Anivia", "Annie", "Aphelios",
+      "Ashe", "Aurelion Sol", "Aurora", "Azir", "Bard", "Bel'Veth", "Blitzcrank", "Brand", "Braum", "Briar",
+      "Caitlyn", "Camille", "Cassiopeia", "Cho'Gath", "Corki", "Darius", "Diana", "Dr. Mundo", "Draven", "Ekko",
+      "Elise", "Evelynn", "Ezreal", "Fiddlesticks", "Fiora", "Fizz", "Galio", "Gangplank", "Garen", "Gnar",
+      "Gragas", "Graves", "Gwen", "Hecarim", "Heimerdinger", "Hwei", "Illaoi", "Irelia", "Ivern", "Janna",
+      "Jarvan IV", "Jax", "Jayce", "Jhin", "Jinx", "K'Santé", "Kai'Sa", "Kalista", "Karma", "Karthus",
+      "Kassadin", "Katarina", "Kayle", "Kayn", "Kennen", "Kha'Zix", "Kindred", "Kled", "Kog'Maw", "LeBlanc",
+      "Lee Sin", "Leona", "Lillia", "Lissandra", "Locke", "Lucian", "Lulu", "Lux", "Maître Yi", "Malphite",
+      "Malzahar", "Maokai", "Mel", "Milio", "Miss Fortune", "Mordekaiser", "Morgana", "Naafiri", "Nami", "Nasus",
+      "Nautilus", "Neeko", "Nidalee", "Nilah", "Nocturne", "Nunu et Willump", "Olaf", "Orianna", "Ornn", "Pantheon",
+      "Poppy", "Pyke", "Qiyana", "Quinn", "Rakan", "Rammus", "Rek'Sai", "Rell", "Renata Glasc", "Renekton",
+      "Rengar", "Riven", "Rumble", "Ryze", "Samira", "Sejuani", "Senna", "Séraphine", "Sett", "Shaco",
+      "Shen", "Shyvana", "Singed", "Sion", "Sivir", "Skarner", "Smolder", "Sona", "Soraka", "Swain",
+      "Sylas", "Syndra", "Tahm Kench", "Taliyah", "Talon", "Taric", "Teemo", "Thresh", "Tristana", "Trundle",
+      "Tryndamere", "Twisted Fate", "Twitch", "Udyr", "Urgot", "Varus", "Vayne", "Veigar", "Vel'Koz", "Vex",
+      "Vi", "Viego", "Viktor", "Vladimir", "Volibear", "Warwick", "Wukong", "Xayah", "Xerath", "Xin Zhao",
+      "Yasuo", "Yone", "Yorick", "Yunara", "Yuumi", "Zaahen", "Zac", "Zed", "Zeri", "Ziggs", "Zilean", "Zoé", "Zyra"
+    ];
+
+    const focalPoints = {
+  "Aatrox": "72% 29%",
+  "Ahri": "67% 27%",
+  "Akali": "51% 30%",
+  "Akshan": "70% 29%",
+  "Alistar": "63% 34%",
+  "Ambessa": "51% 28%",
+  "Amumu": "78% 38%",
+  "Anivia": "50% 32%",
+  "Annie": "98% 29%",
+  "Aphelios": "50% 28%",
+  "Ashe": "78% 27%",
+  "Aurelion Sol": "50% 31%",
+  "Aurora": "50% 28%",
+  "Azir": "83% 29%",
+  "Bard": "63% 35%",
+  "Bel'Veth": "50% 34%",
+  "Blitzcrank": "74% 32%",
+  "Brand": "89% 30%",
+  "Braum": "83% 31%",
+  "Briar": "50% 29%",
+  "Caitlyn": "87% 27%",
+  "Camille": "90% 28%",
+  "Cassiopeia": "70% 31%",
+  "Cho'Gath": "66% 35%",
+  "Corki": "79% 35%",
+  "Darius": "64% 27%",
+  "Diana": "80% 28%",
+  "Dr. Mundo": "50% 30%",
+  "Draven": "85% 28%",
+  "Ekko": "81% 29%",
+  "Elise": "87% 24%",
+  "Evelynn": "50% 27%",
+  "Ezreal": "68% 28%",
+  "Fiddlesticks": "63% 31%",
+  "Fiora": "73% 28%",
+  "Fizz": "100% 31%",
+  "Galio": "50% 32%",
+  "Gangplank": "80% 29%",
+  "Garen": "92% 29%",
+  "Gnar": "86% 34%",
+  "Gragas": "70% 31%",
+  "Graves": "87% 28%",
+  "Gwen": "50% 27%",
+  "Hecarim": "73% 31%",
+  "Heimerdinger": "82% 32%",
+  "Hwei": "50% 28%",
+  "Illaoi": "67% 27%",
+  "Irelia": "50% 27%",
+  "Ivern": "50% 28%",
+  "Janna": "92% 27%",
+  "Jarvan IV": "84% 28%",
+  "Jax": "71% 30%",
+  "Jayce": "84% 27%",
+  "Jhin": "58% 28%",
+  "Jinx": "80% 27%",
+  "K'Santé": "50% 28%",
+  "Kai'Sa": "50% 27%",
+  "Kalista": "72% 28%",
+  "Karma": "86% 28%",
+  "Karthus": "75% 31%",
+  "Kassadin": "68% 30%",
+  "Katarina": "70% 27%",
+  "Kayle": "86% 24%",
+  "Kayn": "50% 33%",
+  "Kennen": "80% 31%",
+  "Kha'Zix": "72% 35%",
+  "Kindred": "87% 29%",
+  "Kled": "92% 31%",
+  "Kog'Maw": "80% 34%",
+  "LeBlanc": "50% 27%",
+  "Lee Sin": "69% 28%",
+  "Leona": "90% 27%",
+  "Lillia": "38% 29%",
+  "Lissandra": "85% 27%",
+  "Locke": "71% 29%",
+  "Lucian": "85% 28%",
+  "Lulu": "86% 23%",
+  "Lux": "74% 25%",
+  "Maître Yi": "92% 27%",
+  "Malphite": "76% 32%",
+  "Malzahar": "70% 29%",
+  "Maokai": "71% 32%",
+  "Mel": "41% 27%",
+  "Milio": "50% 30%",
+  "Miss Fortune": "84% 27%",
+  "Mordekaiser": "42% 30%",
+  "Morgana": "88% 27%",
+  "Naafiri": "30% 31%",
+  "Nami": "89% 29%",
+  "Nasus": "73% 31%",
+  "Nautilus": "91% 32%",
+  "Neeko": "50% 28%",
+  "Nidalee": "84% 27%",
+  "Nilah": "50% 28%",
+  "Nocturne": "77% 30%",
+  "Nunu et Willump": "75% 32%",
+  "Olaf": "66% 29%",
+  "Orianna": "86% 28%",
+  "Ornn": "50% 31%",
+  "Pantheon": "50% 28%",
+  "Poppy": "70% 30%",
+  "Pyke": "50% 29%",
+  "Qiyana": "50% 27%",
+  "Quinn": "74% 28%",
+  "Rakan": "50% 27%",
+  "Rammus": "70% 32%",
+  "Rek'Sai": "50% 33%",
+  "Rell": "50% 28%",
+  "Renata Glasc": "58% 27%",
+  "Renekton": "68% 32%",
+  "Rengar": "72% 29%",
+  "Riven": "88% 27%",
+  "Rumble": "72% 31%",
+  "Ryze": "83% 28%",
+  "Samira": "58% 26%",
+  "Sejuani": "58% 28%",
+  "Senna": "63% 26%",
+  "Séraphine": "50% 26%",
+  "Sett": "50% 27%",
+  "Shaco": "83% 25%",
+  "Shen": "88% 29%",
+  "Shyvana": "50% 30%",
+  "Singed": "78% 31%",
+  "Sion": "78% 26%",
+  "Sivir": "50% 28%",
+  "Skarner": "50% 33%",
+  "Smolder": "50% 32%",
+  "Sona": "78% 27%",
+  "Soraka": "65% 27%",
+  "Swain": "77% 28%",
+  "Sylas": "56% 28%",
+  "Syndra": "50% 27%",
+  "Tahm Kench": "81% 31%",
+  "Taliyah": "80% 28%",
+  "Talon": "71% 28%",
+  "Taric": "86% 27%",
+  "Teemo": "50% 30%",
+  "Thresh": "74% 29%",
+  "Tristana": "72% 31%",
+  "Trundle": "74% 32%",
+  "Tryndamere": "79% 21%",
+  "Twisted Fate": "86% 26%",
+  "Twitch": "50% 29%",
+  "Udyr": "50% 29%",
+  "Urgot": "64% 30%",
+  "Varus": "50% 27%",
+  "Vayne": "88% 26%",
+  "Veigar": "70% 29%",
+  "Vel'Koz": "50% 31%",
+  "Vex": "69% 28%",
+  "Vi": "82% 27%",
+  "Viego": "78% 26%",
+  "Viktor": "50% 27%",
+  "Vladimir": "80% 24%",
+  "Volibear": "63% 30%",
+  "Warwick": "67% 29%",
+  "Wukong": "50% 28%",
+  "Xayah": "50% 26%",
+  "Xerath": "61% 30%",
+  "Xin Zhao": "50% 28%",
+  "Yasuo": "81% 27%",
+  "Yone": "61% 28%",
+  "Yorick": "71% 30%",
+  "Yunara": "68% 27%",
+  "Yuumi": "44% 31%",
+  "Zaahen": "59% 29%",
+  "Zac": "74% 35%",
+  "Zed": "80% 29%",
+  "Zeri": "50% 28%",
+  "Ziggs": "96% 31%",
+  "Zilean": "50% 29%",
+  "Zoé": "50% 29%",
+  "Zyra": "92% 28%"
+};
+
+    const dataDragonNames = {
+      "Aurelion Sol": "AurelionSol",
+      "Bel'Veth": "Belveth",
+      "Cho'Gath": "Chogath",
+      "Dr. Mundo": "DrMundo",
+      "Jarvan IV": "JarvanIV",
+      "K'Santé": "KSante",
+      "Kai'Sa": "Kaisa",
+      "Kha'Zix": "Khazix",
+      "Kog'Maw": "KogMaw",
+      "LeBlanc": "Leblanc",
+      "Maître Yi": "MasterYi",
+      "Miss Fortune": "MissFortune",
+      "Nunu et Willump": "Nunu",
+      "Rek'Sai": "RekSai",
+      "Renata Glasc": "Renata",
+      "Séraphine": "Seraphine",
+      "Tahm Kench": "TahmKench",
+      "Twisted Fate": "TwistedFate",
+      "Vel'Koz": "Velkoz",
+      "Xin Zhao": "XinZhao",
+      "Zoé": "Zoe"
+    };
+
+    const track = document.getElementById("carousel-track");
+    const viewport = document.getElementById("carousel-viewport");
+    const resultName = document.getElementById("result-name");
+    const announcement = document.getElementById("accessible-announcement");
+    const resultPanel = document.getElementById("result-panel");
+
+    let spinning = false;
+    let currentOffset = 0;
+
+    function championAssetName(name) {
+      if (dataDragonNames[name]) return dataDragonNames[name];
+      return name
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g, "")
+        .replace(/[^a-zA-Z0-9]/g, "");
+    }
+
+    function splashUrl(name) {
+      return "https://ddragon.leagueoflegends.com/cdn/img/champion/splash/" + championAssetName(name) + "_0.jpg";
+    }
+
+    function secureRandomIndex(max) {
+      if (window.crypto && window.crypto.getRandomValues) {
+        const limit = Math.floor(0x100000000 / max) * max;
+        const values = new Uint32Array(1);
+        do {
+          window.crypto.getRandomValues(values);
+        } while (values[0] >= limit);
+        return values[0] % max;
+      }
+      return Math.floor(Math.random() * max);
+    }
+
+    function secureRandomUnit() {
+      if (window.crypto && window.crypto.getRandomValues) {
+        const value = new Uint32Array(1);
+        window.crypto.getRandomValues(value);
+        return value[0] / 0x100000000;
+      }
+      return Math.random();
+    }
+
+    function createCard(name, sequenceIndex) {
+      const card = document.createElement("article");
+      card.className = "champion-card";
+      card.dataset.champion = name;
+      card.dataset.sequenceIndex = String(sequenceIndex);
+
+      const image = document.createElement("img");
+      image.className = "champion-splash";
+      image.style.objectPosition = focalPoints[name] || "50% 27%";
+      image.src = splashUrl(name);
+      image.alt = "";
+      image.loading = "eager";
+      image.addEventListener("error", () => card.classList.add("has-fallback"), { once: true });
+
+      const fallback = document.createElement("div");
+      fallback.className = "fallback-art";
+      fallback.setAttribute("aria-hidden", "true");
+      fallback.textContent = name;
+
+      const label = document.createElement("p");
+      label.className = "card-name";
+      label.textContent = name;
+
+      card.append(image, fallback, label);
+      return card;
+    }
+
+    function buildSequence(winner, winnerPosition, pool = champions) {
+      track.replaceChildren();
+      const sequence = [];
+
+      for (let i = 0; i < winnerPosition; i++) {
+        sequence.push(pool[secureRandomIndex(pool.length)]);
+      }
+      sequence.push(winner);
+
+      for (let i = 0; i < 18; i++) {
+        sequence.push(pool[secureRandomIndex(pool.length)]);
+      }
+
+      sequence.forEach((name, index) => track.appendChild(createCard(name, index)));
+      return winnerPosition;
+    }
+
+    function cardStep() {
+      const firstCard = track.querySelector(".champion-card");
+      if (!firstCard) return 0;
+      const style = getComputedStyle(track);
+      return firstCard.getBoundingClientRect().width + parseFloat(style.gap || 0);
+    }
+
+    function updateCardFocus() {
+      const cards = [...track.querySelectorAll(".champion-card")];
+      const viewportBox = viewport.getBoundingClientRect();
+      const center = viewportBox.left + viewportBox.width / 2;
+
+      cards.forEach(card => {
+        const rect = card.getBoundingClientRect();
+        const cardCenter = rect.left + rect.width / 2;
+        const distance = Math.abs(cardCenter - center);
+        card.classList.toggle("is-near", distance < rect.width * 1.1);
+      });
+    }
+
+    function setTrackOffset(offset, duration, easing) {
+      track.style.transition = duration ? "transform " + duration + "ms " + easing : "none";
+      track.style.transform = "translate3d(" + offset + "px,0,0)";
+      currentOffset = offset;
+    }
+
+    function cardMostCoveredByMarker() {
+      const marker = viewport.querySelector(".selection-marker").getBoundingClientRect();
+      return [...track.querySelectorAll(".champion-card")].reduce((best, card) => {
+        const rect = card.getBoundingClientRect();
+        const overlap = Math.max(0, Math.min(rect.right, marker.right) - Math.max(rect.left, marker.left));
+        return !best || overlap > best.overlap ? { card, overlap } : best;
+      }, null)?.card;
+    }
+
+    function drawChampion(input = {}) {
+      if (spinning) return;
+      const options = input instanceof Event ? (input.detail || {}) : input;
+      const requestedPool = Array.isArray(options.pool) ? options.pool : champions;
+      const pool = [...new Set(requestedPool)].filter(name => champions.includes(name));
+      if (!pool.length) {
+        window.dispatchEvent(new CustomEvent("champion-carousel:error", { detail: { message: "Aucun champion ne correspond aux filtres." } }));
+        return;
+      }
+      spinning = true;
+      announcement.textContent = "";
+      resultPanel.classList.remove("is-active");
+
+      const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      const anchorPosition = reducedMotion ? 8 : 48 + secureRandomIndex(11);
+      const anchorChampion = pool[secureRandomIndex(pool.length)];
+      buildSequence(anchorChampion, anchorPosition, pool);
+
+      requestAnimationFrame(() => {
+        setTrackOffset(0, 0, "linear");
+        const anchorCard = track.querySelector('[data-sequence-index="' + anchorPosition + '"]');
+        const viewportBox = viewport.getBoundingClientRect();
+        const cardBox = anchorCard.getBoundingClientRect();
+        const viewportCenter = viewportBox.left + viewportBox.width / 2;
+        const cardCenterAtZero = cardBox.left + cardBox.width / 2;
+        const step = cardStep();
+        // L'arrêt provisoire peut dépasser le milieu d'une carte dans les deux sens.
+        // La carte occupant la majorité du curseur gagne ensuite le recentrage final.
+        const fractionalLanding = reducedMotion ? 0 : (secureRandomUnit() * 1.7 - .85) * step;
+        const targetOffset = viewportCenter - cardCenterAtZero + fractionalLanding;
+        updateCardFocus();
+
+        requestAnimationFrame(() => {
+          const focusTimer = window.setInterval(updateCardFocus, 55);
+          const finish = () => {
+            window.clearInterval(focusTimer);
+            const selected = cardMostCoveredByMarker();
+            const center = viewport.getBoundingClientRect().left + viewport.getBoundingClientRect().width / 2;
+            const selectedBox = selected.getBoundingClientRect();
+            const correction = center - (selectedBox.left + selectedBox.width / 2);
+            const settleDuration = reducedMotion ? 0 : 260 + Math.round(secureRandomUnit() * 190);
+            const suspensePause = reducedMotion ? 0 : 140 + Math.round(secureRandomUnit() * 260);
+
+            window.setTimeout(() => {
+              setTrackOffset(currentOffset + correction, settleDuration, "cubic-bezier(.22,.9,.28,1.08)");
+              window.setTimeout(() => {
+                track.querySelectorAll(".champion-card").forEach(card => card.classList.remove("is-winner", "is-near"));
+                selected.classList.add("is-winner");
+                resultName.textContent = selected.dataset.champion;
+                announcement.textContent = "Champion tiré : " + selected.dataset.champion;
+                resultPanel.classList.add("is-active");
+                spinning = false;
+
+                window.dispatchEvent(new CustomEvent("champion-carousel:result", {
+                  detail: { champion: selected.dataset.champion, constraintLabel: options.constraintLabel || "", filters: options.filters || {} }
+                }));
+              }, settleDuration + 30);
+            }, suspensePause);
+          };
+
+          if (reducedMotion) {
+            setTrackOffset(targetOffset, 0, "linear");
+            finish();
+            return;
+          }
+
+          const duration = 13500 + Math.round(secureRandomUnit() * 4500);
+          const easings = ["cubic-bezier(.14,.76,.12,1)","cubic-bezier(.16,.74,.1,1)","cubic-bezier(.12,.78,.14,1)"];
+          setTrackOffset(targetOffset, duration, easings[secureRandomIndex(easings.length)]);
+          window.setTimeout(finish, duration + 40);
+        });
+      });
+    }
+
+    // API publique destinée au futur panneau de contrôle.
+    // Depuis un script chargé dans cette page : window.championCarousel.spin()
+    // Depuis la page elle-même : dispatchEvent(new Event("champion-carousel:spin"))
+    window.championCarousel = Object.freeze({
+      spin: drawChampion,
+      isSpinning: () => spinning
+    });
+    window.addEventListener("champion-carousel:spin", drawChampion);
+    window.addEventListener("message", event => {
+      if (event.data?.type === "champion-carousel:spin") {
+        drawChampion(event.data);
+      }
+    });
+    if ("BroadcastChannel" in window) {
+      const controlChannel = new BroadcastChannel("champion-wheel-control");
+      controlChannel.addEventListener("message", event => {
+        if (event.data?.type === "champion-carousel:spin") drawChampion(event.data);
+      });
+      window.addEventListener("champion-carousel:result", event => {
+        controlChannel.postMessage({ type: "champion-carousel:result", ...event.detail });
+      });
+    }
+    window.addEventListener("resize", () => {
+      if (!spinning) {
+        setTrackOffset(0, 0, "linear");
+        updateCardFocus();
+      }
+    });
+
+    buildSequence(champions[0], 4);
+    updateCardFocus();
+    lucide.createIcons();
+  </script>
+  <script src="firebase-config.js"></script>
+  <script type="module" src="firebase-wheel.js"></script>
+ 
+</body></html>
