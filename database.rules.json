@@ -5,8 +5,8 @@
     "wheel": {
       "command": {
         ".read": true,
-        ".write": "auth != null && auth.uid === 'CONTROL_UID_A_REMPLACER'",
-        ".validate": "newData.hasChildren(['type', 'pool', 'id', 'sentAt', 'senderUid']) && newData.child('type').val() === 'champion-carousel:spin' && newData.child('senderUid').val() === auth.uid && newData.child('pool').isList() && newData.child('pool').numChildren() > 0 && newData.child('pool').numChildren() <= 173"
+        ".write": true,
+        ".validate": "newData.hasChildren(['type', 'pool', 'id', 'sentAt']) && newData.child('type').val() === 'champion-carousel:spin' && newData.child('pool').isList() && newData.child('pool').numChildren() > 0 && newData.child('pool').numChildren() <= 173"
       }
     }
   }
